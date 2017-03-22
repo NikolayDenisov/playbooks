@@ -1,0 +1,16 @@
+- name: Check Atom is installed.
+  command: "dpkg-query -f '${Status}' -W atom"
+  register: check_atom
+  ignore_errors: yes
+  changed_when: no
+
+- name: Download Atom
+  when: "'ok installed' not in check_atom.stdout"
+  get_url:
+    url: https://atom.io/download/deb
+    dest: /tmp/atom.deb
+
+- name: Install Atom
+  when: "'ok installed' not in check_atom.stdout"
+  apt:
+    deb: /tmp/atom.deb
