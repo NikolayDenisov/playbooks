@@ -1,9 +1,0 @@
-- name: Download Atom (RedHat)
-  when: ansible_os_family == "RedHat"
-  get_url:
-   url: https://atom.io/download/rpm
-   dest: /tmp/atom.rpm
-
-- name: Install Atom (RedHat)
-  when: ansible_os_family == "RedHat"
-  shell: yum install -y /tmp/atom.rpm
