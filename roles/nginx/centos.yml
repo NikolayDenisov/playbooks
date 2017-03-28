@@ -1,0 +1,14 @@
+- hosts: vm
+  tasks:
+    - name: Install nginx
+      yum:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - epel-release
+        - nginx
+      tags: [install]
+    - name: Start nginx
+      systemd:
+        name: nginx
+        state: started
