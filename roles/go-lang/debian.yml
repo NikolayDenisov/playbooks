@@ -1,0 +1,13 @@
+- hosts:vm
+  tasks:
+    - name: "Add golang-go stable repository from PPA and install its signing key."
+      apt_repository:
+        repo: 'ppa:longsleep/golang-backports'
+    - name: "update"
+      apt:
+        update_cache: yes
+    - name: Install the package "golang-go"
+      apt:
+        name: golang-go
+        state: present
+    
