@@ -9,3 +9,5 @@ This repo contains:
 - kapacitor
 - influxdb
 - atom and packages
+- nginx
+- golang-go
