@@ -1,0 +1,22 @@
+- hosts: monitoring
+  tasks:
+    - name: Add grafana repository
+      yum_repository:
+        name: grafana
+        description: grafana
+        baseurl: https://packagecloud.io/grafana/stable/el/6/$basearch
+        gpgcheck: yes
+        gpgkey: https://packagecloud.io/gpg.key https://grafanarel.s3.amazonaws.com/RPM-GPG-KEY-grafana
+        enabled: yes
+        sslverify: yes
+        sslcacert: /etc/pki/tls/certs/ca-bundle.crt
+    - name: Install Grafana packages
+      yum:
+          name: grafana
+          state: present
+          update_cache: yes
+    - name: Start the Grafana service
+      service:
+          name: grafana-server
+          state: restarted
+          enabled: yes
