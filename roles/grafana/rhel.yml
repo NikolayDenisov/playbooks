@@ -6,7 +6,7 @@
         description: grafana
         baseurl: https://packagecloud.io/grafana/stable/el/6/$basearch
         gpgcheck: yes
-        gpgkey: https://packagecloud.io/gpg.key https://grafanarel.s3.amazonaws.com/RPM-GPG-KEY-grafana
+        gpgkey: https://packagecloud.io/grafana/stable/gpgkey
         enabled: yes
         sslverify: yes
         sslcacert: /etc/pki/tls/certs/ca-bundle.crt
