@@ -1,14 +1,19 @@
-- hosts: vm
-  tasks:
-    - name: Install nginx
-      yum:
-        name: "{{ item }}"
-        state: latest
-      with_items:
-        - epel-release
-        - nginx
-      tags: [install]
-    - name: Start nginx
-      systemd:
-        name: nginx
-        state: started
+  - hosts: monitoring
+    tasks:
+      - name: Add repository for nginx
+        yum_repository:
+          name: nginx
+          description: Nginx stable Repository
+          baseurl: http://nginx.org/packages/centos/$releasever/$basearch/
+          enabled: yes
+          gpgkey: http://nginx.org/keys/nginx_signing.key
+          gpgcheck: yes
+      - name: Install nginx packages
+        yum:
+            name: nginx
+            state: latest
+      - name: Start the nginx service
+        systemd:
+            name: nginx
+            state: restarted
+            enabled: yes

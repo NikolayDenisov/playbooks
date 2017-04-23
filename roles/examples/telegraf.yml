@@ -1,7 +1,7 @@
 - hosts: monitoring
   tasks:
-  - name: send a message to chat in playbook
+  - name: 'Send notification message via Telegram'
     telegram:
       token: 'bot9999999:XXXXXXXXXXXXXXXXXXXXXXX'
       chat_id: "@channel_name"
-      msg: Ansible task finished
+      msg: 'Ansible task finished {{ inventory_hostname }}'
