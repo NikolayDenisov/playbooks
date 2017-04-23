@@ -17,4 +17,15 @@
       service:
           name: influxdb
           state: restarted
-       
+    - name: influxdb - wait for service
+      wait_for:
+        port: 8086
+        delay: 1
+    - name: Creating a database
+      shell: "influx --execute 'CREATE DATABASE mydb'"
+      args:
+        executable: /bin/bash
+      tags: [ create db ]
+    - name: Writing data
+      shell: "influx --execute 'INSERT cpu,host=serverA,region=us_west value=0.75' -database='mydb'"
+      tags: [ write db ]

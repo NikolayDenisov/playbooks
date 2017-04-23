@@ -1,21 +1,25 @@
 - hosts: localhost
   tasks:
     - name: Import Grafana GPG signing key
-      apt_key: url=https://packagecloud.io/gpg.key state=present
+      apt_key:
+        url: https://packagecloud.io/gpg.key state=present
     - name: Add grafana repository
-      apt_repository: repo='deb https://packagecloud.io/grafana/stable/debian/ jessie main'
-        state=present
+      apt_repository:
+        repo: 'deb https://packagecloud.io/grafana/stable/debian/ jessie main'
+        state: present
       become: yes
       tags: [ apt ]
     - name: Install Grafana packages
       apt:
-        update_cache=yes
-        name=grafana
-        state=present
+        update_cache: yes
+        name: grafana
+        state: present
       become: yes
       tags: [ installation ]
     - name: Start the Grafana service
-      service: name=grafana-server state=restarted
+      service:
+        name: grafana-server
+        state: restarted
     - name: Replace config
       copy:
         src: /playbooks/roles/grafana/cfg/grafana.ini
