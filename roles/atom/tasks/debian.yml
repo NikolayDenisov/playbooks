@@ -13,6 +13,8 @@
       shell: "apm list --bare | grep -E '^{{ item }}@'&& echo 'Already installed.' || apm install '{{ item }}'"
       with_items:
         - atom-make
+        - python-indent
+        - autocomplete-ansible
         - autocomplete-clang
         - autocomplete-python
         - clang-format
@@ -20,13 +22,16 @@
         - linter-clang
         - linter-pylint
         - linter-shellcheck
+        - linter-python
         - markdown-preview-plus
         - markdown-writer
         - minimap
+        - python-indent
         - python-autopep8
         - python-iresolve
         - python-nosetests
         - python-tools
+        - atom-python-run
         - script
         - split-diff
         - svg-preview

@@ -1,0 +1,23 @@
+- hosts: monitoring
+  tasks:
+    - name: Add repository
+      yum_repository:
+        name: telegraf
+        description: InfluxDB Repository - RHEL $releasever
+        baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
+        enabled: yes
+        gpgkey: https://repos.influxdata.com/influxdb.key
+        gpgcheck: yes
+    - name: Install telegraf packages
+      yum:
+          name: telegraf
+          state: present
+          update_cache: yes
+    - name: Create config
+      shell: 'telegraf -sample-config > telegraf.conf'
+      args:
+        executable: /bin/bash
+    - name: Start the telegraf service
+      service:
+          name: telegraf
+          state: restarted

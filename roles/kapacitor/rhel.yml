@@ -1,0 +1,27 @@
+- hosts: monitoring
+  tasks:
+    - name: Add repository
+      yum_repository:
+        name: influxdb
+        description: InfluxDB Repository - RHEL $releasever
+        baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
+        enabled: yes
+        gpgkey: https://repos.influxdata.com/influxdb.key
+        gpgcheck: yes
+    - name: Install kapacitor packages
+      yum:
+          name: kapacitor
+          state: present
+          update_cache: yes
+    - name: Start the kapacitor service
+      service:
+          name: kapacitor
+          state: restarted
+    - name: kapacitor - wait for service
+      wait_for:
+        port: 9092
+        delay: 1
+    - name: Create config
+      shell: "kapacitord config > kapacitor.generated.conf"
+      args:
+        executable: /bin/bash
