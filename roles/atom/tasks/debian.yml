@@ -12,29 +12,20 @@
     - name: Add packages
       shell: "apm list --bare | grep -E '^{{ item }}@'&& echo 'Already installed.' || apm install '{{ item }}'"
       with_items:
-        - atom-make
-        - python-indent
-        - autocomplete-ansible
-        - autocomplete-clang
-        - autocomplete-python
-        - clang-format
+        - atom-beautify
+        - busy-signal
+        - intentions
         - linter
-        - linter-clang
+        - linter-pycodestyle
+        - linter-pylama
         - linter-pylint
         - linter-shellcheck
-        - linter-python
+        - linter-ui-default
         - markdown-preview-plus
-        - markdown-writer
         - minimap
-        - python-indent
         - python-autopep8
-        - python-iresolve
-        - python-nosetests
-        - python-tools
-        - atom-python-run
         - script
         - split-diff
-        - svg-preview
         - tree-view-git-branch
       register: apm_result
       changed_when: "'Already installed.' not in apm_result.stdout"
