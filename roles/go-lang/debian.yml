@@ -1,4 +1,4 @@
-- hosts:vm
+- hosts: vm
   tasks:
     - name: "Add golang-go stable repository from PPA and install its signing key."
       apt_repository:
@@ -10,4 +10,3 @@
       apt:
         name: golang-go
         state: present
-    

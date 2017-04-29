@@ -1,11 +1,11 @@
 - hosts: vm
   tasks:
-    #- name: Import InfluxDB GPG signing key
-    #  apt_key: url=https://repos.influxdata.com/influxdb.key state=present
+    - name: Import InfluxDB GPG signing key
+      apt_key: url=https://repos.influxdata.com/influxdb.key state=present
     - name: Add InfluxDB repository
       apt_repository:
         repo: 'deb https://repos.influxdata.com/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable'
-        state:present
+        state: present
       become: yes
       tags: [ apt ]
     - name: Install Telegraf packages
@@ -15,7 +15,7 @@
         state: present
       become: yes
       tags: [ installation ]
-    - name: Creating the Configuration File
+    - name: "Creating the Configuration File"
       shell: 'telegraf -sample-config -input-filter cpu:mem -output-filter influxdb > telegraf.conf'
     - name: Start the Telegraf service
       systemd:
