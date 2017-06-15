@@ -10,3 +10,9 @@
         - ipython3
         - python3-pip
         - vim
+        - qemu-kvm 
+        - libvirt-bin 
+        - ubuntu-vm-builder 
+        - bridge-utils
+        - virt-manager
+        - sshpass
