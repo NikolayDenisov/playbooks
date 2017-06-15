@@ -16,3 +16,4 @@
         - bridge-utils
         - virt-manager
         - sshpass
+        - shellcheck
