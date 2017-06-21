@@ -17,3 +17,6 @@
         - virt-manager
         - sshpass
         - shellcheck
+        - ssh
+        - ethtool
+        - unrar
